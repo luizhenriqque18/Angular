@@ -11,7 +11,6 @@
  */
 
 
-export interface Compromisso { 
-    dataHoraConsulta?: Date;
-    idCompromisso?: number;
+export interface MedicoBodyDto { 
+    nomeMedico?: string;
 }

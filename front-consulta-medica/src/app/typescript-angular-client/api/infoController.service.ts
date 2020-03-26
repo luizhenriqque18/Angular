@@ -26,7 +26,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class InfoControllerService {
 
-    protected basePath = 'http://localhost:8000/ws-consulta-medica';
+    protected basePath = 'https://kbmg28-back.herokuapp.com/ws-consulta-medica';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

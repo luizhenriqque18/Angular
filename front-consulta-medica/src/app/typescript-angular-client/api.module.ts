@@ -3,7 +3,9 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { CompromissoControllerService } from './api/compromissoController.service';
 import { InfoControllerService } from './api/infoController.service';
+import { MedicoControllerService } from './api/medicoController.service';
 import { PessoaControllerService } from './api/pessoaController.service';
 
 @NgModule({
@@ -11,7 +13,9 @@ import { PessoaControllerService } from './api/pessoaController.service';
   declarations: [],
   exports:      [],
   providers: [
+    CompromissoControllerService,
     InfoControllerService,
+    MedicoControllerService,
     PessoaControllerService ]
 })
 export class ApiModule {

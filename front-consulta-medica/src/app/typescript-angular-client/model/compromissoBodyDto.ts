@@ -9,13 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Compromisso } from './compromisso';
 
 
-export interface Pessoa { 
-    compromissos?: Array<Compromisso>;
-    email?: string;
+export interface CompromissoBodyDto { 
+    dataHoraConsulta?: Date;
+    idMedico?: number;
     idPessoa?: number;
-    nomeCompleto?: string;
-    senha?: string;
 }

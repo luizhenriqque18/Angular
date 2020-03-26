@@ -32,7 +32,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private pessoaApi: PessoaControllerService) {}
 
   signup(pessoa: PessoaBodyDto) {
-    return this.pessoaApi.createUsingPOST(pessoa)
+    return this.pessoaApi.createUsingPOST2(pessoa)
       .pipe(
         catchError(this.handleError),
         tap(resData => {

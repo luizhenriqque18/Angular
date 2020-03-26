@@ -9,6 +9,9 @@
           <li routerLinkActive="active" *ngIf="isAuthenticated">
             <a routerLink="/painel">Painel</a>
           </li>
+          <li routerLinkActive="active" *ngIf="isAuthenticated">
+            <a routerLink="/medico">Médico</a>
+          </li>
           <li routerLinkActive="active" *ngIf="!isAuthenticated">
             <a routerLink="/auth">Authenticate</a>
           </li>

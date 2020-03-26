@@ -13,6 +13,7 @@ import { EditComponent } from './painel/edit/edit.component';
 import { ListComponent } from './painel/list/list.component';
 import { DetailComponent } from './painel/detail/detail.component';
 import { StartComponent } from './painel/start/start.component';
+import { MedicoComponent } from './medico/medico.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { StartComponent } from './painel/start/start.component';
     ListComponent,
     DetailComponent,
     StartComponent,
+    MedicoComponent,
   ],
   imports: [
     FormsModule,

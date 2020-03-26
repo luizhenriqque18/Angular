@@ -18,16 +18,15 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
+import { MedicoBodyDto } from '../model/medicoBodyDto';
 import { ObjectResponse } from '../model/objectResponse';
-import { PessoaBodyDto } from '../model/pessoaBodyDto';
-import { UsuarioBodyDto } from '../model/usuarioBodyDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class PessoaControllerService {
+export class MedicoControllerService {
 
     protected basePath = 'https://kbmg28-back.herokuapp.com/ws-consulta-medica';
     public defaultHeaders = new HttpHeaders();
@@ -59,66 +58,19 @@ export class PessoaControllerService {
 
 
     /**
-     * auth
-     * 
-     * @param usuario usuario
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public authUsingPOST(usuario: UsuarioBodyDto, observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
-    public authUsingPOST(usuario: UsuarioBodyDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
-    public authUsingPOST(usuario: UsuarioBodyDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
-    public authUsingPOST(usuario: UsuarioBodyDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (usuario === null || usuario === undefined) {
-            throw new Error('Required parameter usuario was null or undefined when calling authUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ObjectResponse>(`${this.basePath}/pessoa/login`,
-            usuario,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * create
      * 
-     * @param pessoa pessoa
+     * @param medico medico
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createUsingPOST2(pessoa: PessoaBodyDto, observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
-    public createUsingPOST2(pessoa: PessoaBodyDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
-    public createUsingPOST2(pessoa: PessoaBodyDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
-    public createUsingPOST2(pessoa: PessoaBodyDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createUsingPOST1(medico: MedicoBodyDto, observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
+    public createUsingPOST1(medico: MedicoBodyDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
+    public createUsingPOST1(medico: MedicoBodyDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
+    public createUsingPOST1(medico: MedicoBodyDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (pessoa === null || pessoa === undefined) {
-            throw new Error('Required parameter pessoa was null or undefined when calling createUsingPOST2.');
+        if (medico === null || medico === undefined) {
+            throw new Error('Required parameter medico was null or undefined when calling createUsingPOST1.');
         }
 
         let headers = this.defaultHeaders;
@@ -141,8 +93,8 @@ export class PessoaControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<ObjectResponse>(`${this.basePath}/pessoa/signup`,
-            pessoa,
+        return this.httpClient.post<ObjectResponse>(`${this.basePath}/medico/create`,
+            medico,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -159,13 +111,13 @@ export class PessoaControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteByIdUsingDELETE2(idPessoa: string, observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
-    public deleteByIdUsingDELETE2(idPessoa: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
-    public deleteByIdUsingDELETE2(idPessoa: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
-    public deleteByIdUsingDELETE2(idPessoa: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteByIdUsingDELETE1(idPessoa: string, observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
+    public deleteByIdUsingDELETE1(idPessoa: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
+    public deleteByIdUsingDELETE1(idPessoa: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
+    public deleteByIdUsingDELETE1(idPessoa: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (idPessoa === null || idPessoa === undefined) {
-            throw new Error('Required parameter idPessoa was null or undefined when calling deleteByIdUsingDELETE2.');
+            throw new Error('Required parameter idPessoa was null or undefined when calling deleteByIdUsingDELETE1.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -189,7 +141,7 @@ export class PessoaControllerService {
             'application/json'
         ];
 
-        return this.httpClient.delete<ObjectResponse>(`${this.basePath}/pessoa/deleteOne`,
+        return this.httpClient.delete<ObjectResponse>(`${this.basePath}/medico/deleteOne`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -206,10 +158,10 @@ export class PessoaControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findAllUsingGET2(observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
-    public findAllUsingGET2(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
-    public findAllUsingGET2(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
-    public findAllUsingGET2(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findAllUsingGET1(observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
+    public findAllUsingGET1(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
+    public findAllUsingGET1(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
+    public findAllUsingGET1(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -227,7 +179,7 @@ export class PessoaControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<ObjectResponse>(`${this.basePath}/pessoa/all`,
+        return this.httpClient.get<ObjectResponse>(`${this.basePath}/medico/all`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -244,13 +196,13 @@ export class PessoaControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findOneUsingGET2(idPessoa: string, observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
-    public findOneUsingGET2(idPessoa: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
-    public findOneUsingGET2(idPessoa: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
-    public findOneUsingGET2(idPessoa: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findOneUsingGET1(idPessoa: string, observe?: 'body', reportProgress?: boolean): Observable<ObjectResponse>;
+    public findOneUsingGET1(idPessoa: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ObjectResponse>>;
+    public findOneUsingGET1(idPessoa: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ObjectResponse>>;
+    public findOneUsingGET1(idPessoa: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (idPessoa === null || idPessoa === undefined) {
-            throw new Error('Required parameter idPessoa was null or undefined when calling findOneUsingGET2.');
+            throw new Error('Required parameter idPessoa was null or undefined when calling findOneUsingGET1.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -274,7 +226,7 @@ export class PessoaControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<ObjectResponse>(`${this.basePath}/pessoa`,
+        return this.httpClient.get<ObjectResponse>(`${this.basePath}/medico`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
